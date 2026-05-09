@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}Home - Seattle TMAX Prediction{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-lg-8 mx-auto text-center">
+        <h1 class="display-4 mb-4">Prediksi Suhu Maksimum di Seattle</h1>
+        <p class="lead">Aplikasi ini menggunakan dataset cuaca historis Seattle (1948–2017) dan lima algoritma Machine Learning untuk memprediksi suhu maksimum (TMAX) hari berikutnya.</p>
+        <hr class="my-4">
+        <div class="row mt-5">
+            <div class="col-md-4 mb-3">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">🧠 5 Algoritma</h5>
+                        <p class="card-text">Linear Regression, ANN, LSTM, K-Means, dan Backpropagation.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">📊 Analisis Komparatif</h5>
+                        <p class="card-text">Perbandingan metrik evaluasi MAE, RMSE, dan R² dari semua model.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">🌐 Prediksi Real-time</h5>
+                        <p class="card-text">Masukkan data cuaca hari ini dan dapatkan prediksi suhu besok.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="/predict" class="btn btn-primary btn-lg mt-4">Mulai Prediksi</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block title %}Predict TMAX{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <h2>Prediksi Suhu Maksimum Besok (TMAX)</h2>
+        <form method="POST" class="mt-4">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Lag 1 Hari Lalu</h5>
+                    <div class="mb-3"><label>TMAX lag1 (°F)</label><input type="number" step="0.1" name="tmax_lag1" class="form-control" required placeholder="Contoh: 75"></div>
+                    <div class="mb-3"><label>TMIN lag1 (°F)</label><input type="number" step="0.1" name="tmin_lag1" class="form-control" required></div>
+                    <div class="mb-3"><label>PRCP lag1 (inch)</label><input type="number" step="0.01" name="prcp_lag1" class="form-control" required></div>
+                    <div class="mb-3"><label>RAIN lag1 (0=Tidak, 1=Ya)</label><select name="rain_lag1" class="form-select"><option value="0">Tidak</option><option value="1">Ya</option></select></div>
+                </div>
+                <div class="col-md-4">
+                    <h5>Lag 2 Hari Lalu</h5>
+                    <div class="mb-3"><label>TMAX lag2</label><input type="number" step="0.1" name="tmax_lag2" class="form-control" required></div>
+                    <div class="mb-3"><label>TMIN lag2</label><input type="number" step="0.1" name="tmin_lag2" class="form-control" required></div>
+                    <div class="mb-3"><label>PRCP lag2</label><input type="number" step="0.01" name="prcp_lag2" class="form-control" required></div>
+                    <div class="mb-3"><label>RAIN lag2</label><select name="rain_lag2" class="form-select"><option value="0">Tidak</option><option value="1">Ya</option></select></div>
+                </div>
+                <div class="col-md-4">
+                    <h5>Lag 3 Hari Lalu</h5>
+                    <div class="mb-3"><label>TMAX lag3</label><input type="number" step="0.1" name="tmax_lag3" class="form-control" required></div>
+                    <div class="mb-3"><label>TMIN lag3</label><input type="number" step="0.1" name="tmin_lag3" class="form-control" required></div>
+                    <div class="mb-3"><label>PRCP lag3</label><input type="number" step="0.01" name="prcp_lag3" class="form-control" required></div>
+                    <div class="mb-3"><label>RAIN lag3</label><select name="rain_lag3" class="form-select"><option value="0">Tidak</option><option value="1">Ya</option></select></div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-4"><div class="mb-3"><label>TMIN Hari Ini (°F)</label><input type="number" step="0.1" name="tmin" class="form-control" required></div></div>
+                <div class="col-md-4"><div class="mb-3"><label>PRCP Hari Ini (inch)</label><input type="number" step="0.01" name="prcp" class="form-control" required></div></div>
+                <div class="col-md-4"><div class="mb-3"><label>Hujan Hari Ini</label><select name="rain" class="form-select"><option value="0">Tidak</option><option value="1">Ya</option></select></div></div>
+            </div>
+            <div class="mb-3">
+                <label>Pilih Model</label>
+                <select name="model" class="form-select">
+                    <option value="lr">Linear Regression</option>
+                    <option value="ann">ANN</option>
+                    <option value="lstm">LSTM</option>
+                    <option value="bp">Backpropagation</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-success btn-lg">Prediksi</button>
+        </form>
+        
+        {% if prediction %}
+        <div class="alert alert-success mt-4">
+            <h4>Hasil Prediksi</h4>
+            <p>Suhu Maksimum Besok (TMAX): <strong>{{ prediction.TMAX }} °F</strong></p>
+            <p>Model: {{ prediction.Model }}</p>
+        </div>
+        {% endif %}
+        {% if error %}
+        <div class="alert alert-danger mt-4">{{ error }}</div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

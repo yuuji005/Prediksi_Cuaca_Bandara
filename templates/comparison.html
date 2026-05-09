@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Comparison Results{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h2>Perbandingan Performa Model</h2>
+        <div class="table-responsive mt-3">
+            <table class="table table-striped">
+                <thead><tr><th>Model</th><th>MAE (°F)</th><th>RMSE (°F)</th><th>R² Score</th></tr></thead>
+                <tbody>
+                {% for model, metrics in results.items() %}
+                <tr>
+                    <td>{{ model }}</td>
+                    <td>{{ "%.2f"|format(metrics.MAE) }}</td>
+                    <td>{{ "%.2f"|format(metrics.RMSE) }}</td>
+                    <td>{{ "%.4f"|format(metrics.R2) }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="mt-4">
+            <h4>Grafik Perbandingan</h4>
+            <img src="{{ url_for('static', filename='comparison_bar.png') }}" class="img-fluid" alt="Comparison Bar Chart">
+        </div>
+    </div>
+</div>
+{% endblock %}
